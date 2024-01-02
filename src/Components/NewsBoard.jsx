@@ -13,16 +13,18 @@ const NewsBoard = ({ category }) => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        if (Array.isArray(data.articles)) {
+        if (data.articles && Array.isArray(data.articles)) {
           setArticles(data.articles);
         } else {
           // Handle the case when 'articles' is not an array
           console.error('Invalid articles data:', data.articles);
+          setArticles([]);
         }
       })
       .catch((error) => {
         // Handle fetch errors
         console.error('Error fetching data:', error);
+        setArticles([]);
       });
   }, [category]);
 
